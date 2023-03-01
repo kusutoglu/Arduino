@@ -1,0 +1,88 @@
+#include <LiquidCrystal.h>
+LiquidCrystal lcd(12, 11, 9, 7, 6, 8);
+const int arttir=3;
+const int azalt=4;
+const int dongu=2;
+ 
+int durum_arttir;
+int durum_azalt;
+int durum_dongu;
+int sayac=0;
+
+void setup() {
+  pinMode(arttir, INPUT);
+  pinMode(azalt, INPUT);
+  pinMode(dongu, INPUT);
+  lcd.begin(16, 2);
+  lcd.setCursor(0, 1);
+}
+
+void loop() {
+  durum_dongu=digitalRead(dongu);
+  while(durum_dongu==HIGH)
+  {
+  durum_arttir=digitalRead(arttir);
+  durum_azalt=digitalRead(azalt);
+
+  if(durum_arttir==HIGH)
+  {
+    lcd.clear();
+    sayac++;
+    lcd.print("kademe  ");
+    lcd.println(sayac);
+    delay(200);
+    }
+  else if(durum_azalt== HIGH)
+  {
+    lcd.clear();
+    sayac--;
+    lcd.print("kademe   ");
+    lcd.println(sayac);
+    delay(200);
+    }
+    durum_dongu=digitalRead(dongu);
+  }
+  
+  switch(sayac)
+  {
+    case 1 :
+    lcd.setCursor(0, 1);
+    lcd.print("1. kademe acik");
+    break;   
+    
+    case 2 :
+    lcd.setCursor(0, 1);
+    lcd.print("2. kademe acik");
+    break;   
+
+    case 3 :
+    lcd.setCursor(0, 1);
+    lcd.print("3. kademe acik");
+    break;  
+  
+    case 4 :
+    lcd.setCursor(0, 1);
+    lcd.print("4. kademe acik");
+    break;   
+
+    case 5 :
+    lcd.setCursor(0, 1);
+    lcd.print("5. kademe acik");
+    break;
+
+    case 6 :
+    lcd.setCursor(0, 1);
+    lcd.print("6. kademe acik");
+    break;
+
+    case 7 :
+    lcd.setCursor(0, 1);
+    lcd.print("7. kademe acik");
+    break;
+    
+    default:
+    lcd.setCursor(0, 1);
+    lcd.println("yanlis kademe");
+    sayac=0;
+    }
+}
