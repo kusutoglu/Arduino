@@ -9,14 +9,14 @@ Adafruit_INA226 ina226;
 int ledPin = 9;
 float ledCurrent;
 
-LiquidCrystal_I2C lcd(0x27, 16, 2); // LCD ekranı için gerekli nesneyi oluşturun
+LiquidCrystal_I2C lcd(0x27, 16, 2);
 
 void setup()
 {
   pinMode(ledPin, OUTPUT);
   Serial.begin(9600);
-  lcd.init(); // LCD ekranını başlat
-  lcd.backlight(); // LCD ekranı arkadan aydınlatılmış olarak ayarla
+  lcd.init();
+  lcd.backlight();
   
   ads.begin();
   ads.setGain(GAIN_TWOTHIRDS);
@@ -37,13 +37,9 @@ void loop()
   digitalWrite(ledPin, HIGH);
   delay(1000);
   
-  lcd.clear(); // LCD ekranını temizle
-  lcd.setCursor(0,0); // LCD ekranının ilk satırına yazdırın
-  lcd.print("Led akimi: ");
+  lcd.clear();
+  lcd.setCursor(0,0);
+  lcd.print("Led Current: ");
   lcd.print(ledCurrent);
   lcd.print("A");
-  
-  Serial.print("Led akimi (ADS1115): ");
-  Serial.print(ledCurrent);
-  Serial.println("A");
 }
